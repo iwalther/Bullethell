@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceFileCollection xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Profile>Reach</Profile>
+  <Platform>DesktopGL</Platform>
+  <Config />
+  <SourceFiles>
+    <File>c:/users/isak.walther/documents/visual studio 2017/Projects/Bullet/Bullet/Content/Spaceship.png</File>
+    <File>c:/users/isak.walther/documents/visual studio 2017/Projects/Bullet/Bullet/Content/Space.jpg</File>
+  </SourceFiles>
+</SourceFileCollection>
