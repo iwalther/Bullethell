@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>c:/users/isak.walther/documents/visual studio 2017/Projects/Bullet/Bullet/Content/Spaceship.png</SourceFile>
-  <SourceTime>2018-04-10T09:59:05.4029135+02:00</SourceTime>
-  <DestFile>c:/users/isak.walther/documents/visual studio 2017/Projects/Bullet/Bullet/Content/bin/DesktopGL/Spaceship.xnb</DestFile>
-  <DestTime>2018-04-10T10:00:18.4619007+02:00</DestTime>
+  <SourceFile>C:/Users/isak.walther/Documents/Visual Studio 2017/Projects/Monogame/Bullet/Bullethell/Bullet/Content/Spaceship.png</SourceFile>
+  <SourceTime>2018-04-10T11:37:23.1216497+02:00</SourceTime>
+  <DestFile>C:/Users/isak.walther/Documents/Visual Studio 2017/Projects/Monogame/Bullet/Bullethell/Bullet/Content/bin/DesktopGL/Spaceship.xnb</DestFile>
+  <DestTime>2018-04-13T12:12:36.3139045+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2017-03-01T16:05:36+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
