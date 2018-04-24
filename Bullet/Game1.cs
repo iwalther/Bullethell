@@ -2,6 +2,8 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Bullet
 {
@@ -22,7 +24,11 @@ namespace Bullet
         float speed;
         float rotation;
         Color color;
+        float attackSpeed;
+        float attackTimer;
 
+
+        List<Bullet> bullets;
 
         public Game1()
         {
@@ -50,6 +56,10 @@ namespace Bullet
             color = Color.White;
             offset = (rocket.Bounds.Size.ToVector2() / 2.0f);
             rocketRect = new Rectangle((position - offset).ToPoint(), (rocket.Bounds.Size.ToVector2() * scale).ToPoint());
+            attackSpeed = 1;
+            attackTimer = 0;
+
+            bullets = new List<Bullet>();
 
         }
 
@@ -63,8 +73,13 @@ namespace Bullet
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-            rocket = Content.Load<Texture2D>("Spaceship");
+            TextureLibrary.LoadTexture(Content, "Rocket");
+            TextureLibrary.LoadTexture(Content, "Space");
+            TextureLibrary.LoadTexture(Content, "bullet");
+
+            rocket = Content.Load<Texture2D>("Rocket");
             space = Content.Load<Texture2D>("Space");
+            //bullet = Content.Load<Texture2D>("bullet");
         }
 
         /// <summary>
@@ -89,24 +104,39 @@ namespace Bullet
             moveDir = mousePos - position;
             float pixelsToMove = speed * deltaTime;
 
-            KeyboardState keyState = Keyboard.GetState();
+            attackTimer += deltaTime;
 
-            if (keyState.IsKeyDown(Keys.Right))
+            if (attackTimer >= attackSpeed)
             {
-                moveDir.X = 1;
+
+                attackTimer = 0;
+                bullets.Add(new Bullet(new Vector2(1, 0), 400, TextureLibrary.GetTexture("bullet"), position));
             }
-            if (keyState.IsKeyDown(Keys.Left))
+
+            for (int i = 0; i < bullets.Count; i++)
             {
-                moveDir.X = -1;
+                bullets[i].Update(deltaTime);
             }
-            if (keyState.IsKeyDown(Keys.Up))
-            {
-                moveDir.Y = -1;
-            }
-            if (keyState.IsKeyDown(Keys.Down))
-            {
-                moveDir.Y = 1;
-            }
+
+            //KeyboardState keyState = Keyboard.GetState();
+
+            //if (keyState.IsKeyDown(Keys.Right))
+            //{
+            //    moveDir.X = 1;
+            //}
+            //if (keyState.IsKeyDown(Keys.Left))
+            //{
+            //    moveDir.X = -1;
+            //}
+            //if (keyState.IsKeyDown(Keys.Up))
+            //{
+            //    moveDir.Y = -1;
+            //}
+            //if (keyState.IsKeyDown(Keys.Down))
+            //{
+            //    moveDir.Y = 1;
+            //}
+
             if (moveDir != Vector2.Zero)
             {
                 moveDir.Normalize();
@@ -128,7 +158,26 @@ namespace Bullet
                 }
                 rocketRect.Location = (position - offset).ToPoint();
             }
+
+            if (position.X <= 0)
+            {
+                position.X = 0;
+            }
+            if(position.X >= 800)
+            {
+                position.X = 800;
+            }
+            if(position.Y >= 480)
+            {
+                position.Y = 480;
+            }
+            if (position.Y <= 0)
+            {
+                position.Y = 0;
+            }
+           
             color = Color.White;
+
 
             base.Update(gameTime);
         }
@@ -145,6 +194,10 @@ namespace Bullet
             spriteBatch.Begin();
             spriteBatch.Draw(space, GraphicsDevice.Viewport.Bounds, Color.White);
             spriteBatch.Draw(rocket, position, null, color, rotation, offset, scale, SpriteEffects.None, 1);
+           for(int i =0; i< bullets.Count;i++)
+            {
+                bullets[i].Draw(spriteBatch);
+            }
             spriteBatch.End();
             base.Draw(gameTime);
         }

@@ -4,7 +4,8 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>c:/users/isak.walther/documents/visual studio 2017/Projects/Bullet/Bullet/Content/Spaceship.png</File>
-    <File>c:/users/isak.walther/documents/visual studio 2017/Projects/Bullet/Bullet/Content/Space.jpg</File>
+    <File>C:/Users/isak.walther/Documents/Visual Studio 2017/Projects/Monogame/Bullethell/Bullet/Content/Space.jpg</File>
+    <File>C:/Users/isak.walther/Documents/Visual Studio 2017/Projects/Monogame/Bullethell/Bullet/Content/bullet.png</File>
+    <File>C:/Users/isak.walther/Documents/Visual Studio 2017/Projects/Monogame/Bullethell/Bullet/Content/Rocket.png</File>
   </SourceFiles>
 </SourceFileCollection>
