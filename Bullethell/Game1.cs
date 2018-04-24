@@ -15,7 +15,8 @@ namespace Bullethell
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Texture2D rocket;
-        Texture2D space;
+        Texture2D space1;
+        Texture2D space2;
         Rectangle rocketRect;
         Vector2 moveDir;
         Vector2 position;
@@ -26,6 +27,7 @@ namespace Bullethell
         Color color;
         float attackSpeed;
         float attackTimer;
+        Background background = new Background();
 
 
         List<Bullet> bullets;
@@ -36,12 +38,6 @@ namespace Bullethell
             Content.RootDirectory = "Content";
         }
 
-        /// <summary>
-        /// Allows the game to perform any initialization it needs to before starting to run.
-        /// This is where it can query for any required services and load any non-graphic
-        /// related content.  Calling base.Initialize will enumerate through any components
-        /// and initialize them as well.
-        /// </summary>
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
@@ -56,17 +52,15 @@ namespace Bullethell
             color = Color.White;
             offset = (rocket.Bounds.Size.ToVector2() / 2.0f);
             rocketRect = new Rectangle((position - offset).ToPoint(), (rocket.Bounds.Size.ToVector2() * scale).ToPoint());
-            attackSpeed = 1;
+            attackSpeed = 0.25f;
             attackTimer = 0;
+            background.Initialize(new Vector2(-1, 0), space1, space2, new Vector2(0, 0), 1000);
 
             bullets = new List<Bullet>();
 
         }
 
-        /// <summary>
-        /// LoadContent will be called once per game and is the place to load
-        /// all of your content.
-        /// </summary>
+
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
@@ -74,28 +68,21 @@ namespace Bullethell
 
             // TODO: use this.Content to load your game content here
             TextureLibrary.LoadTexture(Content, "Rocket");
-            TextureLibrary.LoadTexture(Content, "Space");
+            TextureLibrary.LoadTexture(Content, "Space1");
+            TextureLibrary.LoadTexture(Content, "Space2");
             TextureLibrary.LoadTexture(Content, "bullet");
 
             rocket = Content.Load<Texture2D>("Rocket");
-            space = Content.Load<Texture2D>("Space");
-            //bullet = Content.Load<Texture2D>("bullet");
+            space1 = Content.Load<Texture2D>("Space1");
+            space2 = Content.Load<Texture2D>("Space2");
+
         }
 
-        /// <summary>
-        /// UnloadContent will be called once per game and is the place to unload
-        /// game-specific content.
-        /// </summary>
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
         }
 
-        /// <summary>
-        /// Allows the game to run logic such as updating the world,
-        /// checking for collisions, gathering input, and playing audio.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -106,11 +93,13 @@ namespace Bullethell
 
             attackTimer += deltaTime;
 
+            background.Update(deltaTime);
+
             if (attackTimer >= attackSpeed)
             {
 
                 attackTimer = 0;
-                bullets.Add(new Bullet(new Vector2(1, 0), 400, TextureLibrary.GetTexture("bullet"), position));
+                bullets.Add(new Bullet(new Vector2(1, 0), 1000, TextureLibrary.GetTexture("bullet"), position));
             }
 
             for (int i = 0; i < bullets.Count; i++)
@@ -182,17 +171,15 @@ namespace Bullethell
             base.Update(gameTime);
         }
 
-        /// <summary>
-        /// This is called when the game should draw itself.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();
-            spriteBatch.Draw(space, GraphicsDevice.Viewport.Bounds, Color.White);
+            //spriteBatch.Draw(space1, GraphicsDevice.Viewport.Bounds, Color.White);
+            //spriteBatch.Draw(space2, GraphicsDevice.Viewport.Bounds, Color.White);
+            background.Draw(spriteBatch);
             spriteBatch.Draw(rocket, position, null, color, rotation, offset, scale, SpriteEffects.None, 1);
            for(int i =0; i< bullets.Count;i++)
             {

@@ -27,7 +27,7 @@ namespace Bullethell
             texture = bulletTexture;
             position = startPosition;
             offset = (bulletTexture.Bounds.Size.ToVector2() / 2.0f);
-            scale = new Vector2(0.5f, 0.5f);
+            scale = new Vector2(0.25f, 0.25f);
 
         }
 
