@@ -17,3 +17,4 @@ C:\Users\isak.walther\Documents\Visual Studio 2017\Projects\Monogame\Bullet\Bull
 C:\Users\isak.walther\Documents\Visual Studio 2017\Projects\Monogame\Bullet\Bullethell\Bullethell\bin\DesktopGL\AnyCPU\Debug\MonoGame.Framework.dll
 C:\Users\isak.walther\Documents\Visual Studio 2017\Projects\Monogame\Bullet\Bullethell\Bullethell\obj\Debug\Bullet.exe
 C:\Users\isak.walther\Documents\Visual Studio 2017\Projects\Monogame\Bullet\Bullethell\Bullethell\obj\Debug\Bullet.pdb
+C:\Users\isak.walther\Documents\Visual Studio 2017\Projects\Monogame\Bullet\Bullethell\Bullethell\obj\Debug\Bullethell.csprojResolveAssemblyReference.cache
