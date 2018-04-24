@@ -36,6 +36,7 @@ C:\Users\isak.walther\Documents\Visual Studio 2017\Projects\Monogame\Bullet\Bull
 C:\Users\isak.walther\Documents\Visual Studio 2017\Projects\Monogame\Bullet\Bullethell\Bullet\obj\Debug\Bullet.csprojResolveAssemblyReference.cache
 C:\Users\isak.walther\Documents\Visual Studio 2017\Projects\Monogame\Bullet\Bullethell\Bullet\obj\Debug\Bullet.exe
 C:\Users\isak.walther\Documents\Visual Studio 2017\Projects\Monogame\Bullet\Bullethell\Bullet\obj\Debug\Bullet.pdb
+<<<<<<< HEAD
 C:\Users\isak.walther\Documents\Visual Studio 2017\Projects\Monogame\Bullethell\Bullet\bin\DesktopGL\AnyCPU\Debug\x86\SDL2.dll
 C:\Users\isak.walther\Documents\Visual Studio 2017\Projects\Monogame\Bullethell\Bullet\bin\DesktopGL\AnyCPU\Debug\x64\SDL2.dll
 C:\Users\isak.walther\Documents\Visual Studio 2017\Projects\Monogame\Bullethell\Bullet\bin\DesktopGL\AnyCPU\Debug\x86\soft_oal.dll
@@ -56,3 +57,5 @@ C:\Users\isak.walther\Documents\Visual Studio 2017\Projects\Monogame\Bullethell\
 C:\Users\isak.walther\Documents\Visual Studio 2017\Projects\Monogame\Bullethell\Bullet\obj\Debug\Bullet.exe
 C:\Users\isak.walther\Documents\Visual Studio 2017\Projects\Monogame\Bullethell\Bullet\obj\Debug\Bullet.pdb
 C:\Users\isak.walther\Documents\Visual Studio 2017\Projects\Monogame\Bullethell\Bullet\bin\DesktopGL\AnyCPU\Debug\Content\Rocket.xnb
+=======
+>>>>>>> 53ef31d4efb2a3ce6c56df3e284f0973227b451c

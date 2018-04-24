@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<<<<<<< HEAD:Bullet/Content/obj/DesktopGL/Rocket.mgcontent
   <SourceFile>C:/Users/isak.walther/Documents/Visual Studio 2017/Projects/Monogame/Bullethell/Bullet/Content/Rocket.png</SourceFile>
   <SourceTime>2018-04-10T09:59:05.4029135+02:00</SourceTime>
   <DestFile>C:/Users/isak.walther/Documents/Visual Studio 2017/Projects/Monogame/Bullethell/Bullet/Content/bin/DesktopGL/Rocket.xnb</DestFile>
   <DestTime>2018-04-13T13:09:38.8334103+02:00</DestTime>
+=======
+  <SourceFile>C:/Users/isak.walther/Documents/Visual Studio 2017/Projects/Monogame/Bullet/Bullethell/Bullet/Content/Spaceship.png</SourceFile>
+  <SourceTime>2018-04-10T11:37:23.1216497+02:00</SourceTime>
+  <DestFile>C:/Users/isak.walther/Documents/Visual Studio 2017/Projects/Monogame/Bullet/Bullethell/Bullet/Content/bin/DesktopGL/Spaceship.xnb</DestFile>
+  <DestTime>2018-04-13T12:12:36.3139045+02:00</DestTime>
+>>>>>>> 53ef31d4efb2a3ce6c56df3e284f0973227b451c:Bullet/Content/obj/DesktopGL/Spaceship.mgcontent
   <Importer>TextureImporter</Importer>
   <ImporterTime>2017-03-01T16:05:36+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
