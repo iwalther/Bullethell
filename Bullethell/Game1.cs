@@ -7,9 +7,7 @@ using System.Diagnostics;
 
 namespace Bullethell
 {
-    /// <summary>
-    /// This is the main type for your game.
-    /// </summary>
+
     public class Game1 : Game
     {
         GraphicsDeviceManager graphics;
@@ -52,9 +50,9 @@ namespace Bullethell
             color = Color.White;
             offset = (rocket.Bounds.Size.ToVector2() / 2.0f);
             rocketRect = new Rectangle((position - offset).ToPoint(), (rocket.Bounds.Size.ToVector2() * scale).ToPoint());
-            attackSpeed = 0.25f;
+            attackSpeed = 0.15f;
             attackTimer = 0;
-            background.Initialize(new Vector2(-1, 0), space1, space2, new Vector2(0, 0), 1000);
+            background.Initialize(new Vector2(-1, 0), space1, space2, new Vector2(0, 0), 500);
 
             bullets = new List<Bullet>();
 
@@ -63,7 +61,6 @@ namespace Bullethell
 
         protected override void LoadContent()
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
@@ -92,10 +89,10 @@ namespace Bullethell
             float pixelsToMove = speed * deltaTime;
 
             attackTimer += deltaTime;
-
+            
             background.Update(deltaTime);
 
-            if (attackTimer >= attackSpeed)
+            if (attackTimer >= attackSpeed/*mouseState.LeftButton == ButtonState.Pressed*/)
             {
 
                 attackTimer = 0;
@@ -105,26 +102,9 @@ namespace Bullethell
             for (int i = 0; i < bullets.Count; i++)
             {
                 bullets[i].Update(deltaTime);
+                bullets[i].DestroyBullet(bullets);
             }
 
-            //KeyboardState keyState = Keyboard.GetState();
-
-            //if (keyState.IsKeyDown(Keys.Right))
-            //{
-            //    moveDir.X = 1;
-            //}
-            //if (keyState.IsKeyDown(Keys.Left))
-            //{
-            //    moveDir.X = -1;
-            //}
-            //if (keyState.IsKeyDown(Keys.Up))
-            //{
-            //    moveDir.Y = -1;
-            //}
-            //if (keyState.IsKeyDown(Keys.Down))
-            //{
-            //    moveDir.Y = 1;
-            //}
 
             if (moveDir != Vector2.Zero)
             {
@@ -136,7 +116,7 @@ namespace Bullethell
             {
                 moveDir.Normalize();
 
-                //rotation = (float)Math.Atan2(moveDir.Y, moveDir.X);
+                
                 if (Vector2.Distance(position, mousePos) < pixelsToMove)
                 {
                     position = mousePos;
@@ -177,8 +157,6 @@ namespace Bullethell
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();
-            //spriteBatch.Draw(space1, GraphicsDevice.Viewport.Bounds, Color.White);
-            //spriteBatch.Draw(space2, GraphicsDevice.Viewport.Bounds, Color.White);
             background.Draw(spriteBatch);
             spriteBatch.Draw(rocket, position, null, color, rotation, offset, scale, SpriteEffects.None, 1);
            for(int i =0; i< bullets.Count;i++)

@@ -34,12 +34,22 @@ namespace Bullethell
         public void Update(float deltaTime)
         {
             position += dir * speed * deltaTime;
+
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            Debug.Print("a bullet has spawned");
+            
             spriteBatch.Draw(texture, position, null, Color.White, 0, offset, scale, SpriteEffects.None, 1);
+        }
+
+        public void DestroyBullet(List<Bullet> bullets)
+        {
+            if( position.X > 800)
+            {
+                bullets.Remove(this);
+                Debug.Print("Bullet destroyed");
+            }
         }
     }
 }

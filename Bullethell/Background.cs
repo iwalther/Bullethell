@@ -17,7 +17,6 @@ namespace Bullethell
         Vector2 dir;
         Vector2 position;
         Vector2 position2;
-        float deltaTime;
         float speed;
 
         public void Initialize(Vector2 dir, Texture2D bg1, Texture2D bg2, Vector2 position, float speed)
@@ -34,7 +33,7 @@ namespace Bullethell
         {
             position += dir * deltaTime * speed;
             position2 += dir * deltaTime * speed;
-            Debug.Print(position.ToString());
+            
 
             if(position2.X < 0)
             {
