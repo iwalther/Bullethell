@@ -12,28 +12,42 @@ namespace Bullethell
 {
     class Bullet
     {
-        Vector2 dir;
-        float speed;
+        public enum Owner {Player, Enemy};
+        Owner owner;
         Texture2D texture;
+        Rectangle rectangle;
+        Vector2 dir;
         Vector2 position;
         Vector2 scale;
         Vector2 offset;
+        Color color;
+        float speed;
+        float rotation;
+        float damage;
+        bool alive;
 
-        public Bullet(Vector2 bulletDir, float bulletSpeed, Texture2D bulletTexture, Vector2 startPosition)
+        public Bullet(Texture2D bulletTexture, Vector2 startPosition, Vector2 bulletDir, float bulletSpeed, Vector2 bulletScale, Owner bulletOwner, Color bulletColor)
         {
-            dir = bulletDir;
-            dir.Normalize();
-            speed = bulletSpeed;
             texture = bulletTexture;
             position = startPosition;
+            speed = bulletSpeed;
+            dir = bulletDir;
+            dir.Normalize();
+            scale = bulletScale;
             offset = (bulletTexture.Bounds.Size.ToVector2() / 2.0f);
-            scale = new Vector2(0.25f, 0.25f);
+            rectangle = new Rectangle((startPosition - offset * scale).ToPoint(), (bulletTexture.Bounds.Size.ToVector2() * scale).ToPoint());
+            rotation = (float)Math.Atan2(dir.Y, dir.X);
+            color = bulletColor;
+            damage = 100;
+            alive = true;
+            owner = bulletOwner;
 
         }
 
         public void Update(float deltaTime)
         {
             position += dir * speed * deltaTime;
+            rectangle.Location = position.ToPoint();
 
         }
 
@@ -41,6 +55,29 @@ namespace Bullethell
         {
             
             spriteBatch.Draw(texture, position, null, Color.White, 0, offset, scale, SpriteEffects.None, 1);
+        }
+
+        public float Damage(Rectangle otherRectangle)
+        {
+            float damageToDeal = 0;
+
+            if (rectangle.Intersects(otherRectangle))
+            {
+                damageToDeal = damage;
+                alive = false;
+            }
+
+            return damageToDeal;
+        }
+        
+        public bool GetIsAlive()
+        {
+            return alive;
+        }
+
+        public Owner GetOwner()
+        {
+            return owner;
         }
 
         public void DestroyBullet(List<Bullet> bullets)

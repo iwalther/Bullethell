@@ -20,7 +20,7 @@ namespace Bullethell
 
         public static Texture2D GetTexture(string textureName)
         {
-         return textures[textureName];
+            return textures[textureName];
         }
     }
 }

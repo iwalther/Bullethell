@@ -20,3 +20,4 @@ C:\Users\isak.walther\Documents\Visual Studio 2017\Projects\Monogame\Bullet\Bull
 C:\Users\isak.walther\Documents\Visual Studio 2017\Projects\Monogame\Bullet\Bullethell\Bullethell\obj\Debug\Bullethell.csprojResolveAssemblyReference.cache
 C:\Users\isak.walther\Documents\Visual Studio 2017\Projects\Monogame\Bullet\Bullethell\Bullethell\bin\DesktopGL\AnyCPU\Debug\Content\Space1.xnb
 C:\Users\isak.walther\Documents\Visual Studio 2017\Projects\Monogame\Bullet\Bullethell\Bullethell\bin\DesktopGL\AnyCPU\Debug\Content\Space2.xnb
+C:\Users\isak.walther\Documents\Visual Studio 2017\Projects\Monogame\Bullet\Bullethell\Bullethell\bin\DesktopGL\AnyCPU\Debug\Content\Enemy.xnb

@@ -28,6 +28,9 @@ namespace Bullethell
         Background background = new Background();
 
 
+        Texture2D enemy;
+        List<Enemy> enemies;
+
         List<Bullet> bullets;
 
         public Game1()
@@ -47,6 +50,7 @@ namespace Bullethell
             speed = 3000;
             rotation = 0;
             scale = new Vector2(0.10f, 0.10f);
+
             color = Color.White;
             offset = (rocket.Bounds.Size.ToVector2() / 2.0f);
             rocketRect = new Rectangle((position - offset).ToPoint(), (rocket.Bounds.Size.ToVector2() * scale).ToPoint());
@@ -55,6 +59,9 @@ namespace Bullethell
             background.Initialize(new Vector2(-1, 0), space1, space2, new Vector2(0, 0), 500);
 
             bullets = new List<Bullet>();
+            enemies = new List<Enemy>();
+
+            enemies.Add(new Enemy(enemy, new Vector2(650, 200), 60, new Vector2(1, 1), 0, color, 50, 50, 1));
 
         }
 
@@ -68,10 +75,12 @@ namespace Bullethell
             TextureLibrary.LoadTexture(Content, "Space1");
             TextureLibrary.LoadTexture(Content, "Space2");
             TextureLibrary.LoadTexture(Content, "bullet");
+            TextureLibrary.LoadTexture(Content, "Enemy");
 
             rocket = Content.Load<Texture2D>("Rocket");
             space1 = Content.Load<Texture2D>("Space1");
             space2 = Content.Load<Texture2D>("Space2");
+            enemy = Content.Load<Texture2D>("Enemy");
 
         }
 
@@ -92,11 +101,16 @@ namespace Bullethell
             
             background.Update(deltaTime);
 
+            for (int i = 0; i < enemies.Count; i++)
+            {
+                enemies[i].Update(deltaTime, 480);
+            }
+
             if (attackTimer >= attackSpeed/*mouseState.LeftButton == ButtonState.Pressed*/)
             {
 
                 attackTimer = 0;
-                bullets.Add(new Bullet(new Vector2(1, 0), 1000, TextureLibrary.GetTexture("bullet"), position));
+                bullets.Add(new Bullet(TextureLibrary.GetTexture("bullet"), position, new Vector2(1, 0), 1000, new Vector2(0.25f, 0.25f), Bullet.Owner.Player, color));
             }
 
             for (int i = 0; i < bullets.Count; i++)
@@ -159,9 +173,15 @@ namespace Bullethell
             spriteBatch.Begin();
             background.Draw(spriteBatch);
             spriteBatch.Draw(rocket, position, null, color, rotation, offset, scale, SpriteEffects.None, 1);
-           for(int i =0; i< bullets.Count;i++)
+            //spriteBatch.Draw(enemy, new Vector2(650, 200), null, color, rotation, offset, scale, SpriteEffects.None, 1);
+            for (int i =0; i< bullets.Count;i++)
             {
                 bullets[i].Draw(spriteBatch);
+            }
+
+            for (int i = 0; i < enemies.Count; i++)
+            {
+                enemies[i].Draw(spriteBatch);
             }
             spriteBatch.End();
             base.Draw(gameTime);
