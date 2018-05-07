@@ -50,7 +50,7 @@ namespace Bullethell
 
 
 
-        public void Update(float deltaTime, int windowHeight)
+        public void Update(float deltaTime, int windowHeight, Player player)
         {
             if (alive)
             {
@@ -63,9 +63,9 @@ namespace Bullethell
                     attackTimer += deltaTime;
                 }
 
-                if (Vector2.Distance(position, Player.centerPosition) <= attackRange && attackTimer >= attackSpeed)
+                if (Vector2.Distance(position, player.GetPosition()) <= attackRange && attackTimer >= attackSpeed)
                 {
-                    BulletManager.AddBullet(TextureLibrary.GetTexture("bullet"), position, Player.centerPosition - position, 400, new Vector2(0.2f, 0.2f), Bullet.Owner.Enemy, color);
+                    BulletManager.AddBullet(TextureLibrary.GetTexture("bullet"), position, player.GetPosition() - position, 400, new Vector2(0.2f, 0.2f), Bullet.Owner.Enemy, color);
                     attackTimer = 0;
                 }
             }
@@ -101,5 +101,6 @@ namespace Bullethell
         {
             return alive;
         }
+
     }
 }

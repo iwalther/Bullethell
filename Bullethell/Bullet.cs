@@ -48,7 +48,6 @@ namespace Bullethell
         {
             position += dir * speed * deltaTime;
             rectangle.Location = position.ToPoint();
-
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -60,11 +59,14 @@ namespace Bullethell
         public float Damage(Rectangle otherRectangle)
         {
             float damageToDeal = 0;
-
+            Debug.Print("HIT");
             if (rectangle.Intersects(otherRectangle))
             {
                 damageToDeal = damage;
+                
                 alive = false;
+                
+                
             }
 
             return damageToDeal;
@@ -85,7 +87,7 @@ namespace Bullethell
             if( position.X > 800)
             {
                 bullets.Remove(this);
-                Debug.Print("Bullet destroyed");
+                //Debug.Print("Bullet destroyed");
             }
         }
     }

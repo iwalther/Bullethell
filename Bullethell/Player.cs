@@ -12,7 +12,7 @@ namespace Bullethell
 {
     class Player
     {
-        public static Vector2 centerPosition { get; set; }
+        //public static Vector2 centerPosition { get; set; }
         Texture2D texture;
         Rectangle rectangle;
         Vector2 moveDir;
@@ -45,11 +45,46 @@ namespace Bullethell
 
         public void Update(float deltaTime, KeyboardState keyboardState, MouseState mouseState, Point windowSize)
         {
-            centerPosition = rectangle.Center.ToVector2();
+            float pixelsToMove = speed * deltaTime;
 
             if (alive)
             {
-                //Player Movement
+                Vector2 mousePos = mouseState.Position.ToVector2();
+                moveDir = mousePos - position;
+
+                if (moveDir != Vector2.Zero)
+                {
+                    moveDir.Normalize();
+
+
+                    if (Vector2.Distance(position, mouseState.Position.ToVector2()) < pixelsToMove)
+                    {
+                        position = mouseState.Position.ToVector2();
+                    }
+                    else
+                    {
+                        position += moveDir * pixelsToMove;
+                    }
+                    rectangle.Location = (position - offset * scale).ToPoint();
+                }
+
+
+                if (position.X <= 0)
+                {
+                    position.X = 0;
+                }
+                if (position.X >= 800)
+                {
+                    position.X = 800;
+                }
+                if (position.Y >= 480)
+                {
+                    position.Y = 480;
+                }
+                if (position.Y <= 0)
+                {
+                    position.Y = 0;
+                }
 
                 attackTimer += deltaTime;
                 if (attackTimer <= attackSpeed)
@@ -57,10 +92,11 @@ namespace Bullethell
                     attackTimer += deltaTime;
                 }
 
-                if (mouseState.LeftButton == ButtonState.Pressed && attackTimer >= attackSpeed)
+                if (attackTimer >= attackSpeed)
                 {
-                    Vector2 bulletDir = mouseState.Position.ToVector2() - position;
-                    BulletManager.AddBullet(TextureLibrary.GetTexture("Red"), position, bulletDir, 400, new Vector2(0.2f, 0.2f), Bullet.Owner.Player, color);
+                    Vector2 bulletDir = new Vector2(1, 0);
+
+                    BulletManager.AddBullet(TextureLibrary.GetTexture("bullet"), position, bulletDir, 400, new Vector2(0.2f, 0.2f), Bullet.Owner.Player, color);
                     attackTimer = 0;
                 }
             }
@@ -89,5 +125,9 @@ namespace Bullethell
             return rectangle;
         }
 
+        public Vector2 GetPosition()
+        {
+            return position;
+        }
     }
 }

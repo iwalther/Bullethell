@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Diagnostics;
 
 namespace Bullethell
 {
@@ -21,16 +22,19 @@ namespace Bullethell
 
         public static void Update(float deltaTime, Player player, List<Enemy> enemies)
         {
+          
             for (int i = bullets.Count - 1; i >= 0; i--)
             {
+                Debug.Print("HIT");
                 if (bullets[i].GetIsAlive())
                 {
 
                     bullets[i].Update(deltaTime);
                     Bullet.Owner owner = bullets[i].GetOwner();
                     float damage = 0;
+                    
                     switch (owner)
-                    {
+                    {   
                         case Bullet.Owner.Player:
 
                             for (int j = 0; j < enemies.Count; j++)
