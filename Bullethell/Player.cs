@@ -29,7 +29,7 @@ namespace Bullethell
 
         public Player(Texture2D playerTexture, Vector2 playerStartPos, float playerSpeed, Vector2 playerScale, float playerRotation, Color playerColor, float playerHealth, float playerAttackSpeed)
         {
-            texture = playerTexture;
+            texture = playerTexture;    
             position = playerStartPos;
             speed = playerSpeed;
             moveDir = Vector2.Zero;
