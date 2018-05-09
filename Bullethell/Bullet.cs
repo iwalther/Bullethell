@@ -26,7 +26,9 @@ namespace Bullethell
         float damage;
         bool alive;
 
-        public Bullet(Texture2D bulletTexture, Vector2 startPosition, Vector2 bulletDir, float bulletSpeed, Vector2 bulletScale, Owner bulletOwner, Color bulletColor)
+        public Vector2 AccessPosition { get => position; }
+
+        public Bullet(Texture2D bulletTexture, Vector2 startPosition, Vector2 bulletDir, float bulletSpeed, Vector2 bulletScale, Owner bulletOwner, Color bulletColor, float bulletRotation)
         {
             texture = bulletTexture;
             position = startPosition;
@@ -34,9 +36,9 @@ namespace Bullethell
             dir = bulletDir;
             dir.Normalize();
             scale = bulletScale;
-            offset = (bulletTexture.Bounds.Size.ToVector2() / 2.0f);
+            offset = (bulletTexture.Bounds.Size.ToVector2() * 0.5f);
             rectangle = new Rectangle((startPosition - offset * scale).ToPoint(), (bulletTexture.Bounds.Size.ToVector2() * scale).ToPoint());
-            rotation = (float)Math.Atan2(dir.Y, dir.X);
+            rotation = bulletRotation;
             color = bulletColor;
             damage = 100;
             alive = true;
@@ -53,13 +55,12 @@ namespace Bullethell
         public void Draw(SpriteBatch spriteBatch)
         {
             
-            spriteBatch.Draw(texture, position, null, Color.White, 0, offset, scale, SpriteEffects.None, 1);
+            spriteBatch.Draw(texture, position, null, Color.White, rotation, offset, scale, SpriteEffects.None, 1);
         }
 
         public float Damage(Rectangle otherRectangle)
         {
             float damageToDeal = 0;
-            Debug.Print("HIT");
             if (rectangle.Intersects(otherRectangle))
             {
                 damageToDeal = damage;
@@ -82,13 +83,18 @@ namespace Bullethell
             return owner;
         }
 
-        public void DestroyBullet(List<Bullet> bullets)
-        {
-            if( position.X > 800)
-            {
-                bullets.Remove(this);
-                //Debug.Print("Bullet destroyed");
-            }
-        }
+        //public void DestroyBullet(List<Bullet> bullets)
+        //{
+        //    if( position.X > 800)
+        //    {
+        //        bullets.Remove(this);
+        //        //Debug.Print("Bullet destroyed");
+        //    }
+        //    else if (position.X <= 1)
+        //    {
+        //        bullets.Remove(this);
+        //        Debug.Print("Bullet destroyed");
+        //    }
+        //}
     }
 }

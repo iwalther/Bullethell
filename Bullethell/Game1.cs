@@ -25,12 +25,17 @@ namespace Bullethell
         Color color;
         float attackSpeed;
         float attackTimer;
+        float spawnTimer;
         Background background = new Background();
+
+        Texture2D gameOver;
 
         Player player;
 
         Texture2D enemy;
         List<Enemy> enemies;
+
+        Random randomizer = new Random();
 
         //List<Bullet> bullets;
 
@@ -38,6 +43,8 @@ namespace Bullethell
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            graphics.PreferredBackBufferHeight = 900;
+            graphics.PreferredBackBufferWidth = 1400;
         }
 
         protected override void Initialize()
@@ -58,12 +65,20 @@ namespace Bullethell
             attackSpeed = 0.15f;
             attackTimer = 0;
             background.Initialize(new Vector2(-1, 0), space1, space2, new Vector2(0, 0), 500);
-            player = new Player(TextureLibrary.GetTexture("Rocket"), new Vector2(100, 100), 3000, new Vector2(0.1f, 0.1f), 0, Color.White, 100, 1);
+            player = new Player(TextureLibrary.GetTexture("Rocket"), new Vector2(100, 100), 3000, new Vector2(0.1f, 0.1f), 0, Color.White, 100, 0.5f);
+
+            spawnTimer = randomizer.Next(1, 5);
 
             //bullets = new List<Bullet>();
             enemies = new List<Enemy>();
 
-            enemies.Add(new Enemy(enemy, new Vector2(650, 200), 60, new Vector2(1, 1), 0, color, 50, 50, 1));
+            enemies.Add(new Enemy(enemy, new Vector2(randomizer.Next(750, 1450), randomizer.Next(50, 850)), 60, new Vector2(1, 1), 0, color, 50, 50, randomizer.Next(2, 5)));
+            enemies.Add(new Enemy(enemy, new Vector2(randomizer.Next(750, 1450), randomizer.Next(50, 850)), 60, new Vector2(1, 1), 0, color, 50, 50, randomizer.Next(2, 5)));
+            enemies.Add(new Enemy(enemy, new Vector2(randomizer.Next(750, 1450), randomizer.Next(50, 850)), 60, new Vector2(1, 1), 0, color, 50, 50, randomizer.Next(2, 5)));
+            enemies.Add(new Enemy(enemy, new Vector2(randomizer.Next(750, 1450), randomizer.Next(50, 420)), 60, new Vector2(1, 1), 0, color, 50, 50, randomizer.Next(2, 5)));
+            enemies.Add(new Enemy(enemy, new Vector2(randomizer.Next(750, 1450), randomizer.Next(50, 850)), 60, new Vector2(1, 1), 0, color, 50, 50, randomizer.Next(2, 5)));
+            enemies.Add(new Enemy(enemy, new Vector2(randomizer.Next(750, 1450), randomizer.Next(50, 850)), 60, new Vector2(1, 1), 0, color, 50, 50, randomizer.Next(2, 5)));
+
 
         }
 
@@ -78,11 +93,13 @@ namespace Bullethell
             TextureLibrary.LoadTexture(Content, "Space2");
             TextureLibrary.LoadTexture(Content, "bullet");
             TextureLibrary.LoadTexture(Content, "Enemy");
+            TextureLibrary.LoadTexture(Content, "gameover");
 
             rocket = Content.Load<Texture2D>("Rocket");
             space1 = Content.Load<Texture2D>("Space1");
             space2 = Content.Load<Texture2D>("Space2");
             enemy = Content.Load<Texture2D>("Enemy");
+            gameOver = Content.Load<Texture2D>("gameover");
 
         }
 
@@ -96,6 +113,11 @@ namespace Bullethell
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             MouseState mouseState = Mouse.GetState();
 
+            if(enemies.Count < 8)
+            {
+                Spawn(deltaTime);
+            }
+
 
             player.Update(deltaTime, Keyboard.GetState(), Mouse.GetState(), Window.ClientBounds.Size);
 
@@ -107,31 +129,36 @@ namespace Bullethell
             for (int i = 0; i < enemies.Count; i++)
             {
                 enemies[i].Update(deltaTime, 480, player);
+                if (enemies[i].GetIsAlive() == false)
+                {
+                    enemies.Remove(enemies[i]);
+                   
+                }
                 
             }
-
-            //if (attackTimer >= attackSpeed/*mouseState.LeftButton == ButtonState.Pressed*/)
-            //{
-
-            //    attackTimer = 0;
-            // bullets.Add(new Bullet(TextureLibrary.GetTexture("bullet"), position, new Vector2(1, 0), 1000, new Vector2(0.25f, 0.25f), Bullet.Owner.Player, color));
-            //}
-
-            //for (int i = 0; i < bullets.Count; i++)
-            //{
-            //    bullets[i].Update(deltaTime);
-            //    bullets[i].DestroyBullet(bullets);
-            //}
-
-
-            
-
-           
             color = Color.White;
-
-
+            
             base.Update(gameTime);
         }
+
+        public void Spawn(float deltaTime)
+        {
+            if (spawnTimer > 0)
+            {
+                spawnTimer += -deltaTime;
+            }
+            else
+            {
+                spawnTimer = randomizer.Next(1, 3);
+                enemies.Add(new Enemy(enemy, new Vector2(randomizer.Next(750, 1450), randomizer.Next(50, 900)), 60, new Vector2(1, 1), 0, color, 50, 50, randomizer.Next(2, 5)));
+
+            }
+            if (player.GetIsAlive() == false)
+            {
+                spawnTimer = 1;
+            }
+        }
+
 
         protected override void Draw(GameTime gameTime)
         {
@@ -140,14 +167,10 @@ namespace Bullethell
             // TODO: Add your drawing code here
             spriteBatch.Begin();
             background.Draw(spriteBatch);
-            //spriteBatch.Draw(rocket, position, null, color, rotation, offset, scale, SpriteEffects.None, 1);
-            //spriteBatch.Draw(enemy, new Vector2(650, 200), null, color, rotation, offset, scale, SpriteEffects.None, 1);
-            //for (int i =0; i< bullets.Count;i++)
-            //{
-            //    bullets[i].Draw(spriteBatch);
-            //}
+
 
             player.Draw(spriteBatch);
+
             BulletManager.Draw(spriteBatch);
 
             for (int i = 0; i < enemies.Count; i++)

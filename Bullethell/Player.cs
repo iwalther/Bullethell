@@ -73,13 +73,13 @@ namespace Bullethell
                 {
                     position.X = 0;
                 }
-                if (position.X >= 800)
+                if (position.X >= 1400)
                 {
-                    position.X = 800;
+                    position.X = 1400;
                 }
-                if (position.Y >= 480)
+                if (position.Y >= 900)
                 {
-                    position.Y = 480;
+                    position.Y = 900;
                 }
                 if (position.Y <= 0)
                 {
@@ -96,7 +96,7 @@ namespace Bullethell
                 {
                     Vector2 bulletDir = new Vector2(1, 0);
 
-                    BulletManager.AddBullet(TextureLibrary.GetTexture("bullet"), position, bulletDir, 400, new Vector2(0.2f, 0.2f), Bullet.Owner.Player, color);
+                    BulletManager.AddBullet(TextureLibrary.GetTexture("bullet"), position, bulletDir, 400, new Vector2(0.2f, 0.2f), Bullet.Owner.Player, color, 0);
                     attackTimer = 0;
                 }
             }
@@ -128,6 +128,11 @@ namespace Bullethell
         public Vector2 GetPosition()
         {
             return position;
+        }
+
+        public bool GetIsAlive()
+        {
+            return alive;
         }
     }
 }

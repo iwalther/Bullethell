@@ -14,9 +14,9 @@ namespace Bullethell
     {
         static List<Bullet> bullets = new List<Bullet>();
 
-        public static void AddBullet (Texture2D texture, Vector2 startPosition, Vector2 dir, float speed, Vector2 scale, Bullet.Owner owner, Color color)
+        public static void AddBullet (Texture2D texture, Vector2 startPosition, Vector2 dir, float speed, Vector2 scale, Bullet.Owner owner, Color color, float bulletRotation)
         {
-            bullets.Add(new Bullet(texture, startPosition, dir, speed, scale, owner, color));
+            bullets.Add(new Bullet(texture, startPosition, dir, speed, scale, owner, color, bulletRotation));
         }
 
 
@@ -25,7 +25,6 @@ namespace Bullethell
           
             for (int i = bullets.Count - 1; i >= 0; i--)
             {
-                Debug.Print("HIT");
                 if (bullets[i].GetIsAlive())
                 {
 
@@ -42,10 +41,18 @@ namespace Bullethell
                                 damage = bullets[i].Damage(enemies[j].GetRectangle());
                                 enemies[j].ChangeHealth(-damage);
                             }
+                            if(bullets[i].AccessPosition.X >= 1500)
+                            {
+                                bullets.RemoveAt(i);
+                            }
                             break;
                         case Bullet.Owner.Enemy:
                             damage = bullets[i].Damage(player.GetRectangle());
                             player.ChangeHealth(-damage);
+                            if (bullets[i].AccessPosition.X <= 0)
+                            {
+                                bullets.RemoveAt(i);
+                            }
                             break;
                     }
                 }

@@ -56,19 +56,28 @@ namespace Bullethell
             {
                 //Enemy Movement
 
-                attackTimer += deltaTime;
 
+                //if (Vector2.Distance(position, player.GetPosition()) <= attackRange && attackTimer >= attackSpeed)
+                //{
+                //    BulletManager.AddBullet(TextureLibrary.GetTexture("bullet"), position, player.GetPosition() - position, 400, new Vector2(0.2f, 0.2f), Bullet.Owner.Enemy, color);
+                //    attackTimer = 0;
+                //}
+
+                attackTimer += deltaTime;
                 if (attackTimer <= attackSpeed)
                 {
                     attackTimer += deltaTime;
                 }
 
-                if (Vector2.Distance(position, player.GetPosition()) <= attackRange && attackTimer >= attackSpeed)
+                if (attackTimer >= attackSpeed)
                 {
-                    BulletManager.AddBullet(TextureLibrary.GetTexture("bullet"), position, player.GetPosition() - position, 400, new Vector2(0.2f, 0.2f), Bullet.Owner.Enemy, color);
+                    Vector2 bulletDir = new Vector2(-1, 0);
+
+                    BulletManager.AddBullet(TextureLibrary.GetTexture("bullet"), position, bulletDir, 400, new Vector2(0.2f, 0.2f), Bullet.Owner.Enemy, color, 3.14f);
                     attackTimer = 0;
                 }
             }
+
 
         }
 
