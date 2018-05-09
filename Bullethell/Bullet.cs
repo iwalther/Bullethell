@@ -40,7 +40,7 @@ namespace Bullethell
             rectangle = new Rectangle((startPosition - offset * scale).ToPoint(), (bulletTexture.Bounds.Size.ToVector2() * scale).ToPoint());
             rotation = bulletRotation;
             color = bulletColor;
-            damage = 100;
+            damage = 50;
             alive = true;
             owner = bulletOwner;
 
@@ -66,7 +66,7 @@ namespace Bullethell
                 damageToDeal = damage;
                 
                 alive = false;
-                
+               
                 
             }
 

@@ -22,3 +22,5 @@ C:\Users\isak.walther\Documents\Visual Studio 2017\Projects\Monogame\Bullet\Bull
 C:\Users\isak.walther\Documents\Visual Studio 2017\Projects\Monogame\Bullet\Bullethell\Bullethell\bin\DesktopGL\AnyCPU\Debug\Content\Space2.xnb
 C:\Users\isak.walther\Documents\Visual Studio 2017\Projects\Monogame\Bullet\Bullethell\Bullethell\bin\DesktopGL\AnyCPU\Debug\Content\Enemy.xnb
 C:\Users\isak.walther\Documents\Visual Studio 2017\Projects\Monogame\Bullet\Bullethell\Bullethell\bin\DesktopGL\AnyCPU\Debug\Content\gameover.xnb
+C:\Users\isak.walther\Documents\Visual Studio 2017\Projects\Monogame\Bullet\Bullethell\Bullethell\bin\DesktopGL\AnyCPU\Debug\Content\Button.xnb
+C:\Users\isak.walther\Documents\Visual Studio 2017\Projects\Monogame\Bullet\Bullethell\Bullethell\bin\DesktopGL\AnyCPU\Debug\Content\File.xnb

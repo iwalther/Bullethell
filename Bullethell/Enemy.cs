@@ -56,13 +56,6 @@ namespace Bullethell
             {
                 //Enemy Movement
 
-
-                //if (Vector2.Distance(position, player.GetPosition()) <= attackRange && attackTimer >= attackSpeed)
-                //{
-                //    BulletManager.AddBullet(TextureLibrary.GetTexture("bullet"), position, player.GetPosition() - position, 400, new Vector2(0.2f, 0.2f), Bullet.Owner.Enemy, color);
-                //    attackTimer = 0;
-                //}
-
                 attackTimer += deltaTime;
                 if (attackTimer <= attackSpeed)
                 {

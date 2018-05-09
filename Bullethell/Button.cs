@@ -49,7 +49,7 @@ namespace Bullethell
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, position, null, color, 0, offset, scale, SpriteEffects.None, 0);
+            spriteBatch.Draw(texture, position, null, color, 0, offset, new Vector2(0.5f, 0.5f), SpriteEffects.None, 0);
             spriteBatch.DrawString(font, text, position, Color.White, 0, textOffset, textScale, SpriteEffects.None, 0);
         }
 

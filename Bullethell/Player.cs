@@ -12,7 +12,6 @@ namespace Bullethell
 {
     class Player
     {
-        //public static Vector2 centerPosition { get; set; }
         Texture2D texture;
         Rectangle rectangle;
         Vector2 moveDir;
@@ -25,6 +24,7 @@ namespace Bullethell
         float attackSpeed;
         float attackTimer;
         float health;
+        public int score;
         bool alive = true;
 
         public Player(Texture2D playerTexture, Vector2 playerStartPos, float playerSpeed, Vector2 playerScale, float playerRotation, Color playerColor, float playerHealth, float playerAttackSpeed)
@@ -41,6 +41,7 @@ namespace Bullethell
             health = playerHealth;
             attackSpeed = playerAttackSpeed;
             attackTimer = 0;
+            score = 0;
         }
 
         public void Update(float deltaTime, KeyboardState keyboardState, MouseState mouseState, Point windowSize)
@@ -117,7 +118,21 @@ namespace Bullethell
             if (health <= 0)
             {
                 alive = false;
+                if (health < 0)
+                {
+                    health = 0;
+                }
             }
+        }
+
+        public float GetHealth()
+        {
+            return health;
+        }
+
+        public float GetScore()
+        {
+            return score;
         }
 
         public Rectangle GetRectangle()
